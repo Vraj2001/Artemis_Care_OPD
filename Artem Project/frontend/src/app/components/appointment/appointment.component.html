@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="card glass">
+    <h2>Book Appointment</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Select Patient</label>
+        <select [(ngModel)]="selectedPatientId">
+          <option [ngValue]="null">-- Select Patient --</option>
+          <option *ngFor="let p of patients" [ngValue]="p.id">{{p.name}} ({{p.phoneNumber}})</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Date & Time</label>
+        <input type="datetime-local" [(ngModel)]="appointmentDateTime">
+      </div>
+      <div class="form-group">
+        <label>Doctor</label>
+        <select [(ngModel)]="doctor">
+          <option value="">-- Select Doctor --</option>
+          <option value="Dr. Sharma">Dr. Sharma (General)</option>
+          <option value="Dr. Verma">Dr. Verma (Cardio)</option>
+          <option value="Dr. Iyer">Dr. Iyer (Neuro)</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn primary" (click)="bookAppointment()">Book Appointment</button>
+  </div>
+
+  <div class="card glass list-card">
+    <h2>Today's Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Patient</th>
+          <th>Doctor</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of appointments">
+          <td>{{a.dateTime | date:'shortTime'}}</td>
+          <td>{{a.patient.name}}</td>
+          <td>{{a.doctor}}</td>
+          <td><span class="badge" [class.completed]="a.status==='COMPLETED'">{{a.status}}</span></td>
+          <td>
+            <button class="btn danger sm" (click)="deleteAppointment(a.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="appointments.length === 0" class="no-data">No appointments for today.</div>
+  </div>
+
+  <div class="card glass list-card">
+    <h2>Upcoming / All Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date & Time</th>
+          <th>Patient</th>
+          <th>Doctor</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of allAppointments">
+          <td>{{a.dateTime | date:'medium'}}</td>
+          <td>{{a.patient.name}}</td>
+          <td>{{a.doctor}}</td>
+          <td><span class="badge" [class.completed]="a.status==='COMPLETED'">{{a.status}}</span></td>
+          <td>
+            <button class="btn danger sm" (click)="deleteAppointment(a.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

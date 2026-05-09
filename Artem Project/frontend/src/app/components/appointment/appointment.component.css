@@ -1,0 +1,5 @@
+/* Appointment component styles */
+.badge {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

@@ -1,0 +1,17 @@
+<div class="app-layout">
+  <nav class="sidebar glass" [class.open]="isSidebarOpen">
+    <div class="logo">
+      <h1>Artemis Care</h1>
+    </div>
+    <ul class="nav-links">
+      <li><a routerLink="/patients" routerLinkActive="active" (click)="toggleSidebar()">Patients</a></li>
+      <li><a routerLink="/appointments" routerLinkActive="active" (click)="toggleSidebar()">Appointments</a></li>
+      <li><a routerLink="/consultations" routerLinkActive="active" (click)="toggleSidebar()">Consultations</a></li>
+    </ul>
+  </nav>
+  <main class="content">
+    <header class="top-bar">
+    </header>
+    <router-outlet></router-outlet>
+  </main>
+</div>
